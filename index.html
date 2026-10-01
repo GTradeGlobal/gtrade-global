@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gtrade Global — Crypto Investment</title>
+  <meta name="description" content="Gtrade Global crypto trading homepage demo." />
+  <style>
+    :root{
+      --navy:#031225; --navy2:#061a33; --blue:#087cff; --blue2:#1d9bf0;
+      --text:#f5f8ff; --muted:#a8b6ca; --green:#18c98b; --line:#17304e;
+      --light:#f6f9fd; --ink:#10213a;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:#fff}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit;cursor:pointer}
+    .container{width:min(1440px,92%);margin:auto}
+
+    /* NAV */
+    .nav{height:74px;background:#041426;color:white;border-bottom:1px solid #17304d;
+      display:flex;align-items:center;position:sticky;top:0;z-index:20}
+    .nav-inner{display:flex;align-items:center;gap:28px;width:min(1440px,92%);margin:auto}
+    .brand{display:flex;align-items:center;gap:10px;min-width:230px}
+    .brand-mark{width:38px;height:38px;border:6px solid #2085ff;border-radius:50%;
+      position:relative;transform:rotate(-30deg)}
+    .brand-mark:after{content:"";position:absolute;width:17px;height:6px;background:#fff;
+      right:-8px;top:10px;border-radius:8px}
+    .brand strong{font-size:21px;letter-spacing:-.5px}
+    .brand small{display:block;color:#94a8c1;font-size:11px;margin-top:1px;letter-spacing:.5px}
+    .links{display:flex;align-items:center;gap:27px;font-size:14px;flex:1}
+    .links a{color:#e4ebf5;padding:27px 0;border-bottom:2px solid transparent}
+    .links a.active,.links a:hover{color:#32a0ff;border-color:#1688ff}
+    .nav-actions{display:flex;align-items:center;gap:12px}
+    .search{font-size:22px;color:#d8e2ef}
+    .btn{border:1px solid #1688ff;background:transparent;color:#fff;border-radius:8px;padding:11px 22px;font-weight:700}
+    .btn.primary{background:#1384f4;border-color:#1384f4}
+    .btn:hover{filter:brightness(1.08)}
+
+    /* HERO */
+    .hero{background:radial-gradient(circle at 78% 35%,#123763 0,#06172d 42%,#020d1d 100%);
+      color:#fff;min-height:520px;overflow:hidden}
+    .hero-inner{display:grid;grid-template-columns:44% 56%;min-height:520px;align-items:center}
+    .eyebrow{font-size:14px;letter-spacing:.3px;color:#c6d4e6;margin-bottom:16px}
+    h1{font-size:47px;line-height:1.07;margin:0 0 20px;letter-spacing:-1.6px}
+    h1 span{color:#1590ff}
+    .hero-copy p{font-size:16px;line-height:1.65;color:#b9c7d9;max-width:650px}
+    .hero-buttons{display:flex;gap:14px;margin:26px 0 28px}
+    .hero-buttons .btn{padding:13px 27px}
+    .trust-row{display:flex;gap:25px;flex-wrap:wrap}
+    .trust{display:flex;align-items:center;gap:8px;color:#c7d4e4;font-size:12px;border-right:1px solid #29415e;padding-right:22px}
+    .trust:last-child{border:0}
+    .check{color:#1f91ff;font-size:22px}
+    .hero-art{position:relative;height:100%;display:flex;align-items:center;justify-content:center}
+    .screen{width:610px;height:355px;background:#07182d;border:8px solid #0c1c31;border-radius:13px;
+      box-shadow:0 25px 60px #0008;transform:perspective(1000px) rotateY(-5deg);overflow:hidden}
+    .screen-top{height:43px;background:#0d233d;display:flex;align-items:center;padding:0 18px;gap:16px;color:#a9bad0;font-size:11px}
+    .screen-top b{color:white}
+    .chart{height:210px;margin:12px 20px;border-bottom:1px solid #1e3b5c;position:relative;
+      background:repeating-linear-gradient(to bottom,transparent 0 40px,#16324e 41px)}
+    .chart:after{content:"";position:absolute;inset:25px 0 10px;
+      background:linear-gradient(150deg,transparent 0 12%,#16d19b 13% 14%,transparent 15% 24%,#16d19b 25% 26%,transparent 27% 39%,#e94d6d 40% 41%,transparent 42% 52%,#16d19b 53% 54%,transparent 55% 66%,#16d19b 67% 68%,transparent 69% 78%,#16d19b 79% 80%,transparent 81%);
+      opacity:.9}
+    .orders{display:flex;gap:10px;padding:0 20px;color:#7990aa;font-size:9px}
+    .phone{position:absolute;width:155px;height:305px;background:#06172c;border:7px solid #14253a;
+      border-radius:25px;left:12%;bottom:12px;z-index:2;box-shadow:0 20px 40px #0009}
+    .phone .phead{height:35px;padding:10px;color:#b8c8dc;font-size:8px}
+    .balance{padding:8px 12px;color:#fff;font-size:18px;font-weight:700}
+    .balance small{display:block;color:#19d39a;font-size:8px;margin-top:4px}
+    .coins{padding:10px 12px;color:#dce8f7;font-size:9px}
+    .coin{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #17324e}
+    .coin b{color:#18ce91}
+    .side-copy{position:absolute;right:2%;top:25%;width:180px;color:#fff}
+    .side-copy h3{font-size:20px;margin:0 0 15px}
+    .side-copy li{list-style:none;margin:12px 0;font-size:12px;color:#d3deec}
+    .side-copy li:before{content:"✓";color:#19d39a;font-weight:900;margin-right:9px}
+
+    /* MARKET */
+    .market{padding:24px 0;background:#fff}
+    .section-title{font-size:18px;margin:0 0 12px;color:#172a44}
+    .market-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+    .market-card{border:1px solid #e1e9f2;border-radius:10px;padding:15px;background:#fff;box-shadow:0 3px 10px #163a5c0a}
+    .market-card .name{font-size:12px;color:#61728a}
+    .market-card .price{font-size:16px;font-weight:800;margin:6px 0}
+    .up{color:#18ae7b;font-size:12px;font-weight:700}
+    .coin-icon{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+      background:#ff9d19;color:#fff;font-weight:900;margin-right:9px}
+    .market-name{display:flex;align-items:center}
+
+    /* FEATURES */
+    .features{background:#f5f8fc;padding:58px 0}
+    .center{text-align:center}
+    .center h2{font-size:27px;margin:0 0 8px}
+    .center p{color:#6b7b91;margin:0 0 42px}
+    .feature-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:25px}
+    .feature{text-align:center;padding:10px}
+    .feature-icon{font-size:38px;color:#087cff;margin-bottom:14px}
+    .feature h3{font-size:16px;margin:0 0 8px}
+    .feature p{font-size:13px;line-height:1.5;color:#718198;margin:0}
+
+    /* CTA */
+    .cta{background:#031a35;color:white;padding:34px 0}
+    .cta-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .cta h2{font-size:22px;margin:0 0 5px}.cta p{margin:0;color:#aebed2;font-size:12px}
+
+    /* FOOTER */
+    footer{background:#020d1b;color:#a9b9ce;padding:25px 0 12px}
+    .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr 1.2fr;gap:30px}
+    footer h4{color:white;margin:0 0 12px;font-size:13px}
+    footer a,footer p{font-size:11px;line-height:1.9;margin:0}
+    .footer-brand{color:white;font-size:17px;font-weight:800}
+    .copyright{border-top:1px solid #18304b;margin-top:20px;padding-top:12px;display:flex;justify-content:space-between;font-size:10px}
+    .badges{color:#c8d5e5}
+
+    @media(max-width:1000px){
+      .links{display:none}.nav-inner{justify-content:space-between}
+      .hero-inner{grid-template-columns:1fr}.hero-copy{padding:65px 0 20px}.hero-art{min-height:420px}
+      .market-grid{grid-template-columns:repeat(3,1fr)}
+      .feature-grid{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:620px){
+      h1{font-size:35px}.hero{min-height:auto}.hero-inner{min-height:auto}
+      .hero-art{transform:scale(.72);transform-origin:top center;margin-bottom:-100px}
+      .market-grid{grid-template-columns:repeat(2,1fr)}
+      .feature-grid{grid-template-columns:1fr}
+      .cta-inner{flex-direction:column;align-items:flex-start}
+      .footer-grid{grid-template-columns:1fr 1fr}.copyright{display:block}
+      .nav-actions .btn:first-of-type{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#">
+        <span class="brand-mark"></span>
+        <span><strong>Gtrade Global</strong><small>Trade · Invest · Grow</small></span>
+      </a>
+      <nav class="links">
+        <a class="active" href="#">Home</a><a href="#markets">Markets⌄</a>
+        <a href="#trade">Trade⌄</a><a href="#earn">Earn⌄</a><a href="#wallet">Wallet⌄</a>
+        <a href="#about">About Us</a><a href="#help">Help</a>
+      </nav>
+      <div class="nav-actions"><span class="search">⌕</span><button class="btn">Log In</button><button class="btn primary">Sign Up</button></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow">YOUR TRUSTED CRYPTO INVESTMENT PARTNER</div>
+          <h1>Buy, Sell &amp; Invest in <span>Cryptocurrency</span> with Confidence</h1>
+          <p>Gtrade Global is a secure, fast and easy-to-use crypto exchange platform that gives you access to leading digital assets. Trade, earn, and grow your portfolio — all in one place.</p>
+          <div class="hero-buttons"><a class="btn primary" href="#markets">Get Started →</a><a class="btn" href="#markets">View Markets</a></div>
+          <div class="trust-row">
+            <div class="trust"><span class="check">♢</span><span><b>Bank-Level Security</b><br>Funds are always protected</span></div>
+            <div class="trust"><span class="check">ϟ</span><span><b>Fast Transactions</b><br>Buy and sell in minutes</span></div>
+            <div class="trust"><span class="check">♧</span><span><b>24/7 Support</b><br>We're always here to help</span></div>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <div class="screen">
+            <div class="screen-top"><b>Gtrade Global</b><span>Spot</span><span>Margin</span><span>Futures</span><span style="margin-left:auto">BTC/USDT</span><b>$68,432.17</b></div>
+            <div class="chart"></div><div class="orders"><span>Open Orders</span><span>Order History</span><span>Trade History</span></div>
+          </div>
+          <div class="phone"><div class="phead">Gtrade Global</div><div class="balance">$12,458.32<small>▲ 6.24% Today</small></div><div class="coins">
+            <div class="coin">Bitcoin <b>$68,432</b></div><div class="coin">Ethereum <b>$3,271</b></div><div class="coin">Solana <b>$143</b></div><div class="coin">BNB <b>$582</b></div>
+          </div></div>
+          <div class="side-copy"><h3>Trade Smarter with Gtrade Global</h3><ul><li>Low trading fees</li><li>Wide range of cryptocurrencies</li><li>Advanced trading tools</li><li>Secure cold storage</li><li>Global access</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="market" id="markets">
+      <div class="container">
+        <h2 class="section-title">Top Cryptocurrencies</h2>
+        <div class="market-grid">
+          <div class="market-card"><div class="market-name"><span class="coin-icon">₿</span><span class="name">Bitcoin (BTC)</span></div><div class="price">$68,432.17</div><div class="up">+2.48%</div></div>
+          <div class="market-card"><div class="market-name"><span class="coin-icon" style="background:#627eea">◆</span><span class="name">Ethereum (ETH)</span></div><div class="price">$3,271.56</div><div class="up">+1.92%</div></div>
+          <div class="market-card"><div class="market-name"><span class="coin-icon" style="background:#111">≋</span><span class="name">Solana (SOL)</span></div><div class="price">$143.21</div><div class="up">+3.76%</div></div>
+          <div class="market-card"><div class="market-name"><span class="coin-icon" style="background:#f0b90b">◆</span><span class="name">BNB (BNB)</span></div><div class="price">$582.14</div><div class="up">+1.34%</div></div>
+          <div class="market-card"><div class="market-name"><span class="coin-icon" style="background:#222">X</span><span class="name">XRP (XRP)</span></div><div class="price">$0.52</div><div class="up">+2.11%</div></div>
+          <div class="market-card"><div class="market-name"><span class="coin-icon" style="background:#d5a23a">Ð</span><span class="name">Dogecoin (DOGE)</span></div><div class="price">$0.1578</div><div class="up">+4.62%</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="about">
+      <div class="container">
+        <div class="center"><h2>Why Choose Gtrade Global?</h2><p>We provide the tools, security and support you need to navigate the crypto market.</p></div>
+        <div class="feature-grid">
+          <div class="feature"><div class="feature-icon">♢</div><h3>Top-Tier Security</h3><p>Advanced encryption and cold storage for your assets.</p></div>
+          <div class="feature"><div class="feature-icon">ϟ</div><h3>Instant Transactions</h3><p>Deposit, trade and withdraw with ease.</p></div>
+          <div class="feature"><div class="feature-icon">◎</div><h3>Competitive Fees</h3><p>Low fees and transparent pricing.</p></div>
+          <div class="feature"><div class="feature-icon">↗</div><h3>Multiple Ways to Earn</h3><p>Staking, savings and flexible options.</p></div>
+          <div class="feature"><div class="feature-icon">♧</div><h3>24/7 Customer Support</h3><p>Real people, real help, anytime.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="help">
+      <div class="container cta-inner"><div><h2>Start Your Crypto Journey Today</h2><p>Explore digital assets and learn about the risks before investing.</p></div><a class="btn primary" href="#">Create Free Account →</a></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div><div class="footer-brand">Gtrade Global</div><p>Trade · Invest · Grow</p></div>
+        <div><h4>Quick Links</h4><a href="#">Home</a><br><a href="#markets">Markets</a><br><a href="#trade">Trade</a><br><a href="#earn">Earn</a><br><a href="#wallet">Wallet</a></div>
+        <div><h4>About Us</h4><a href="#about">Company</a><br><a href="#">Careers</a><br><a href="#">News</a><br><a href="#">Contact Us</a></div>
+        <div><h4>Legal</h4><a href="#">Terms &amp; Conditions</a><br><a href="#">Privacy Policy</a><br><a href="#">Risk Disclosure</a><br><a href="#">AML/KYC</a></div>
+        <div><h4>Contact</h4><p>support@gtradeglobal.com</p><p>+1 (800) 555-0189</p><p>123 Finance Street, Suite 400<br>New York, NY 10005, USA</p></div>
+      </div>
+      <div class="copyright"><span>© 2025 Gtrade Global. All rights reserved.</span><span class="badges">🔒 SSL SECURED &nbsp; · &nbsp; 🔒 TRUSTED &amp; REGULATED</span></div>
+    </div>
+  </footer>
+
+  <script>
+    // Demo interactions only — replace with real backend/API integrations.
+    document.querySelectorAll('.links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelectorAll('.links a').forEach(x => x.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        if (btn.getAttribute('href') === '#') {
+          e.preventDefault();
+          alert('Demo button — connect this action to your real signup/login system.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
